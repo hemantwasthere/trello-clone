@@ -1,9 +1,14 @@
-import Image from 'next/image'
+import Board from "@/components/Board";
+import Header from "@/components/Header";
+import { NextPage } from "next";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  )
-}
+    <main>
+      <Header />
+      <Board />
+    </main>
+  );
+};
+
+export default Home;
