@@ -14,7 +14,6 @@ const fetchSuggestion = async (board: Board) => {
 
     const GPTdata = await res.json();
     const { content } = GPTdata;
-    console.log(GPTdata)
 
 
     return content;

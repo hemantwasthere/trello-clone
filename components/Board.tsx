@@ -124,7 +124,7 @@ const Board: React.FC = () => {
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto "
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-5 xl:mx-auto "
           >
             {Array.from(board.columns.entries()).map(([id, column], index) => (
               <Column key={id} id={id} todos={column.todos} index={index} />

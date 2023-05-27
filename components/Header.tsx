@@ -96,8 +96,14 @@ const Header: React.FC = () => {
           {loading
             ? "GPT is summarising your tasks for the day..."
             : `Hello There, welcome to the Trello 2.0! Here is a summary of your
-          todos: To do - ${formattedTodo?.todo}, In Progress - 
-          ${formattedTodo?.inprogress}, Done - ${formattedTodo?.done}. Keep up the
+          todos: To do - ${
+            formattedTodo?.todo ? formattedTodo?.todo : 0
+          }, In Progress - 
+          ${
+            formattedTodo?.inprogress ? formattedTodo?.inprogress : 0
+          }, Done - ${
+                formattedTodo?.done ? formattedTodo?.done : 0
+              }. Keep up the
           good work and have a productive day!`}
         </p>
       </div>
