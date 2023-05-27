@@ -49,7 +49,7 @@ const Header: React.FC = () => {
     const todos = formatTodosForAI(board);
     setFormattedTodo(todos);
     setLoading(false);
-  }, [board]);
+  }, [board, setLoading]);
 
   return (
     <header>
