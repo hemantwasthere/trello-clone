@@ -33,7 +33,7 @@ const Column: React.FC<ColumnProps> = ({ id, todos, index }) => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 className={`p-2 rounded-2xl shadow-sm ${
-                  snapshot.isDraggingOver ? "bg-gray-200" : "bg-white/50"
+                  snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
                 } `}
               >
                 <h2 className="flex justify-between font-bold text-xl p-2 ">
