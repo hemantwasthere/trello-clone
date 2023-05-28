@@ -1,10 +1,13 @@
 "use client";
 
+import { account } from "@/appwrite";
 import fetchSuggestion from "@/lib/fetchSuggestion";
 import formatTodosForAI from "@/lib/formatTodosForAI";
 import { useAIStore } from "@/store/AIStore";
+import { useAuthStore } from "@/store/AuthStore";
 import { useBoardStore } from "@/store/BoardStore";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { ID } from "appwrite";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar";
@@ -25,24 +28,18 @@ const Header: React.FC = () => {
     ]
   );
 
+  const [name, email, setName, setEmail] = useAuthStore((state) => [
+    state.name,
+    state.email,
+    state.setName,
+    state.setEmail,
+  ]);
+
   const [formattedTodo, setFormattedTodo] = useState<{
     todo: number;
     inprogress: number;
     done: number;
   }>();
-
-  // useEffect(() => {
-  //   if (board.columns.size === 0) return;
-  //   setLoading(true);
-
-  //   const fetchSuggestionFunc = async () => {
-  //     const suggestion = await fetchSuggestion(board);
-  //     setSuggestion(suggestion);
-  //     setLoading(false);
-  //   };
-
-  //   fetchSuggestionFunc();
-  // }, [board]);
 
   useEffect(() => {
     setLoading(true);
@@ -50,6 +47,20 @@ const Header: React.FC = () => {
     setFormattedTodo(todos);
     setLoading(false);
   }, [board, setLoading]);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await account.get();
+        setEmail(response.email);
+        setName(response.name);
+        console.log(response.email, response.name);
+      } catch (error) {
+        console.log("Error fetching user data:", error);
+      }
+    };
+    getUserData();
+  }, [name, email, setName, setEmail]);
 
   return (
     <header>
@@ -82,7 +93,7 @@ const Header: React.FC = () => {
           </form>
 
           {/* Avatar  */}
-          <Avatar name="Hemant" round size="50" color="#0055D1" />
+          <Avatar name={name} round size="50" color="#0055D1" />
         </div>
       </div>
 
@@ -95,7 +106,7 @@ const Header: React.FC = () => {
           />
           {loading
             ? "GPT is summarising your tasks for the day..."
-            : `Hello There, welcome to the Trello 2.0! Here is a summary of your
+            : `Hello ${name}, welcome to the Trello 2.0! Here is a summary of your
           todos: To do - ${
             formattedTodo?.todo ? formattedTodo?.todo : 0
           }, In Progress - 
