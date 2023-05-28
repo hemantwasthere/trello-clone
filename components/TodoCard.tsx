@@ -17,6 +17,7 @@ type TodoCardProps = {
   innerRef: (element: HTMLElement | null) => void;
   draggableProps: DraggableProvidedDraggableProps;
   dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
+  isDragging: boolean;
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({
@@ -26,6 +27,7 @@ const TodoCard: React.FC<TodoCardProps> = ({
   innerRef,
   draggableProps,
   dragHandleProps,
+  isDragging,
 }) => {
   const [deleteTask] = useBoardStore((state) => [state.deleteTask]);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -45,7 +47,7 @@ const TodoCard: React.FC<TodoCardProps> = ({
       ref={innerRef}
       {...draggableProps}
       {...dragHandleProps}
-      className="bg-white rounded-md space-y-2 drop-shadow-md "
+      className={`bg-white rounded-md space-y-2 drop-shadow-md ${isDragging && 'rotate-3'} `}
     >
       <div className="flex justify-between items-center p-5">
         <p>{todo.title}</p>
@@ -62,7 +64,7 @@ const TodoCard: React.FC<TodoCardProps> = ({
         <div className="h-full w-full rounded-b-md">
           <Image
             src={imageUrl}
-            alt="Task Ima"
+            alt="Task Image"
             width={400}
             height={200}
             className="w-full object-contain rounded-b-md"

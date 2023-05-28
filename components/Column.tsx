@@ -77,7 +77,7 @@ const Column: React.FC<ColumnProps> = ({ id, todos, index }) => {
                         draggableId={todo.$id}
                         index={index}
                       >
-                        {(provided) => (
+                        {(provided, snapshot) => (
                           <TodoCard
                             todo={todo}
                             index={index}
@@ -85,6 +85,7 @@ const Column: React.FC<ColumnProps> = ({ id, todos, index }) => {
                             innerRef={provided.innerRef}
                             draggableProps={provided.draggableProps}
                             dragHandleProps={provided.dragHandleProps}
+                            isDragging={snapshot.isDragging}
                           />
                         )}
                       </Draggable>
