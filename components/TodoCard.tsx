@@ -47,7 +47,9 @@ const TodoCard: React.FC<TodoCardProps> = ({
       ref={innerRef}
       {...draggableProps}
       {...dragHandleProps}
-      className={`bg-white rounded-md space-y-2 drop-shadow-md ${isDragging && 'rotate-3'} `}
+      className={`bg-white rounded-md space-y-2 drop-shadow-md ${
+        isDragging && ""
+      } `}
     >
       <div className="flex justify-between items-center p-5">
         <p>{todo.title}</p>
